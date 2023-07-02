@@ -1,0 +1,68 @@
+.header {
+    padding-top: 15px;
+    margin-right: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    background-color: blue;
+    width: 100%;
+}
+
+
+.header nav #timer {
+    display: inline-block;
+    color: aliceblue;
+    font-size: 45px;
+
+}
+
+
+.header nav #show-h-scores {
+    display: inline-block;
+    color: aliceblue;
+    font-size: 45px;
+    justify-content: space-between;
+
+}
+.container{
+    background-color: red;
+    width: 100%;
+    height: 50rem;
+}
+
+
+.question-container{
+background-color: aquamarine;
+width: 50%;
+height: 60%;
+position: absolute;
+  top: 20%;
+  left: 28%;
+  margin: -25px 0 0 -25px
+
+}
+
+.questions{
+    background-color:antiquewhite;
+    height: 30%;
+}
+
+.answerButtons{
+    background-color: beige;
+    height:50%;
+}
+
+
+.answerButtons button{
+    background-color: blueviolet;
+    display: block;
+    margin: 1rem;
+    font-size: 35px;
+    border-radius: 15%;
+}
+
+#answer{
+
+    border: solid;
+    font-size: 44px;
+
+}
