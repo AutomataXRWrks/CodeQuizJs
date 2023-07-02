@@ -1,4 +1,7 @@
-var timerText = geteElementbyId(timer);
+var timerText = document.querySelector('#timer');
+
+var secondsLeft = 10;
+var scene = 0;
 
 
 var codeQuiz  = {
@@ -16,7 +19,7 @@ function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function() {
       secondsLeft++;
-      timerText.textContent = secondsLeft + " seconds left till colorsplosion.";
+      timerText.textContent =  "Time:" + secondsLeft;
   
       if(secondsLeft === 0) {
         // Stops execution of action at set interval
@@ -26,8 +29,14 @@ function setTime() {
       }
   
     }, 1000);
+
+    return secondsLeft
   }
 
   function init(){
     setTime();
+    console.log('init');
   }
+
+
+  init();
