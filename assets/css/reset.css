@@ -12,7 +12,9 @@
     display: inline-block;
     color: aliceblue;
     font-size: 45px;
-    width: 40%;
+    width: 45%;
+    text-align: right;
+
 
 }
 
@@ -22,7 +24,7 @@
     color: aliceblue;
     font-size: 45px;
     justify-content: space-between;
-    width: 40%;
+    width: 50%;
 
 }
 .container{
@@ -46,6 +48,8 @@ position: absolute;
 .questions{
     background-color:antiquewhite;
     height: 30%;
+    font-size: 70px;
+    font-weight: bold;
 }
 
 .answerButtons{
@@ -55,12 +59,18 @@ position: absolute;
 
 
 .answerButtons button{
-    background-color: blueviolet;
+    background-color: rgb(53, 28, 117);
     display: block;
-    margin: 1rem;
+    margin: 2rem;
     font-size: 25px;
-    border-radius: 15%;
+    border-radius: 8px;
+    width: 20%;
+    color: white;
 
+}
+
+.answerButtons button:hover{
+    background-color: rgb(189, 96, 231);
 }
 
 #answer{
