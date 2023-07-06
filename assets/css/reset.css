@@ -77,8 +77,7 @@ position: absolute;
     display: block;
     margin: 1rem;
     font-size: 25px;
-    border-radius: 8px;
-    flex: wrap;    
+    border-radius: 8px;  
     width: 30%;
     height: 22%;
     color: white;
@@ -100,6 +99,44 @@ position: absolute;
     position: absolute;
     left: 40%;
 }
+
+
+.goback{
+    background-color: rgb(53, 28, 117);
+    margin: 1rem;
+    font-size: 25px;
+    border-radius: 8px;
+    flex: wrap;    
+    width: 20%;
+    height: 12%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    left: -2%;
+}
+
+.clearhs{
+    background-color: rgb(53, 28, 117);
+    margin: 1rem;
+    font-size: 25px;
+    border-radius: 8px;
+    flex: wrap;    
+    width: 30%;
+    height: 12%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    left: 20%;
+}
+
+.goback:hover{
+    background-color: rgb(189, 96, 231);
+}
+
+.clearhs:hover{
+    background-color: rgb(189, 96, 231);
+}
+
 
 .answerButtons button:hover{
     background-color: rgb(189, 96, 231);
