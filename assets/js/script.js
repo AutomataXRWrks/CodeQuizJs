@@ -7,6 +7,8 @@ var initSubTitle = document.querySelector('.init-text');
 var scores = document.querySelector('#show-h-scores');
 var result = document.querySelector('#answer');
 var buttons = document.createElement('button');
+var gobButton = document.createElement('button');
+var clearHScores = document.createElement('button');
 
 var codeQuiz  = {
     scene: 0,
@@ -35,7 +37,7 @@ function setTime() {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         // Calls function to create and append image
-        sendMessage();
+        createSumbitScore();
       }
   
     }, 1000);
@@ -88,67 +90,98 @@ function setTime() {
     initButton.remove();
       if(scene === 0){
         questions.textContent = codeQuiz.questions[scene];
-        questions.setAttribute("style" , "font-size: 55px", "text-align: left");
+        questions.setAttribute("style" , "font-size: 55px; text-align: left;");
       } else if (scene === 1){
         questions.textContent = codeQuiz.questions[scene]; 
-        questions.setAttribute("style" , "font-size: 55px", "text-align: left");
+        questions.setAttribute("style" , "font-size: 55px; text-align: left;");
       } else if (scene === 2){
         questions.textContent = codeQuiz.questions[scene];
-        questions.setAttribute("style" , "font-size: 60px" , "text-align: left");   
+        questions.setAttribute("style" , "font-size: 60px; text-align: left;");   
       } else if (scene === 3){
         questions.textContent = codeQuiz.questions[scene];
-        questions.setAttribute("style" , "font-size: 51px" , "text-align: left");
-        console.log(questions.style);      
+        questions.setAttribute("style" , "font-size: 51px; text-align: left;"); 
       } else if (scene === 4){
         questions.textContent = codeQuiz.questions[scene];
-        questions.setAttribute("style" , "font-size: 46px", 'text-align: left');  
+        questions.setAttribute("style" , "font-size: 46px; text-align: left;");  
       }  
   }
 
+  function createHighScoreMenu(){
+    questions.textContent  = "High scores";
+    questions.setAttribute("style" , "text-align: left");
+    gobButton.textContent = "Go back";
+    gobButton.setAttribute("class", "goback");
+    clearHScores.textContent = "Clear high scores"
+    clearHScores.setAttribute("style", "display: inline");
+    clearHScores.setAttribute("class", "clearhs");
+    questionContainer.append(gobButton,clearHScores);
+    initSubTitle.textContent = "";
+    timerText.textContent = "";
+    initButton.remove();
+    optionsContainer.remove();
+    result.remove();
+  }
+
+  function createSumbitScore(){
+    initButton.remove();
+    optionsContainer.remove();
+    result.remove();
+    questions.textContent = 'All Done!';
+    questions.setAttribute("style" , "font-size: 60px; text-align: left; font-family: Arial, Helvetica, sans-serif;");
+    initSubTitle.textContent = 'Your final score is' , '.';
+    initSubTitle.setAttribute('style', "font-size: 45px; padding-top:.5rem;font-family: Arial, Helvetica, sans-serif;");
+    var userNameContainer = document.createElement('div');
+    userNameContainer.setAttribute('style', " height:20%; ");
+    var initials = document.createElement('div');
+    initials.textContent = 'Enter initals';
+    initials.setAttribute("style" , "display:inline;  font-size: 38px; width:40%; margin:.5rem; font-family: Arial, Helvetica, sans-serif;");
+    var inputInitials = document.createElement('input');
+    inputInitials.setAttribute("style", "display:inline; width:50%; height:35%;");
+    var buttonSubmit = document.createElement('button');
+    buttonSubmit.setAttribute("class" , "submitscore");
+    buttonSubmit.textContent = 'Submit';
+    userNameContainer.appendChild(initials,);
+    userNameContainer.appendChild(inputInitials);
+    userNameContainer.appendChild(buttonSubmit);
+    questionContainer.appendChild(userNameContainer);
+    buttonSubmit.addEventListener('click', function(event){
+      location.reload();
+    });
+
+  }
 
   scores.addEventListener("click", function(event) {
+
     var element = event.target;
     if(element){
-      questions.textContent  = "High scores";
-      questions.setAttribute("style" , "text-align: left");
-      var gobButton = document.createElement('button');
-      gobButton.textContent = "Go back";
-      gobButton.setAttribute("class", "goback");
-      var clearHScores = document.createElement('button');
-      clearHScores.textContent = "Clear high scores"
-      clearHScores.setAttribute("style", "display: inline");
-      clearHScores.setAttribute("class", "clearhs");
-      questionContainer.append(gobButton,clearHScores);
-      initSubTitle.textContent = "";
-      timerText.textContent = "";
-      initButton.remove();
-      optionsContainer.remove();
-      result.remove();
-
-
+      createHighScoreMenu();
     }
   });
 
 initButton.addEventListener('click', function(event){
-  event.preventDefault();
-  //console.log(event);
+
     createQuestions(codeQuiz.scene);
     createButtons(codeQuiz.scene);
+    console.log(codeQuiz.scene);
 });
 
 optionsContainer.addEventListener("click", function(event) {
+  event.stopPropagation();
   var element = event.target;
+  console.log(element);
   if(element.textContent == "3. alerts"){
     codeQuiz.scene++;
     optionsContainer.innerHTML = "";
     createQuestions(codeQuiz.scene);
     createButtons(codeQuiz.scene);
+    console.log(codeQuiz.scene);
 
-  } if(element.textContent == "3. parenthesis"){
+  } if(element.textContent === "3. parenthesis"){
     codeQuiz.scene++;
     optionsContainer.innerHTML = "";
     createQuestions(codeQuiz.scene);
     createButtons(codeQuiz.scene);
+    console.log(codeQuiz.scene);
 
   }if(element.textContent == "4. all of the above"){
     codeQuiz.scene++;
@@ -167,8 +200,17 @@ optionsContainer.addEventListener("click", function(event) {
     optionsContainer.innerHTML = "";
     createSumbitScore();
 
-    
-  }
+  } 
+});
+
+
+gobButton.addEventListener('click', function(event){
+  event.stopPropagation();
+  //gobButton.remove();
+  //clearHScores.remove();
+  //createQuestions(codeQuiz.scene);
+  //createButtons(codeQuiz.scene);
+  location.reload();
 });
 
   function init(){
