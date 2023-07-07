@@ -13,6 +13,8 @@ var clearHScores = document.createElement('button');
 var codeQuiz  = {
     scene: 0,
     secondsLeft: 60,
+    score: 0,
+    currentLocaStorageName: ["answer1", "answer2", "answer3", "answer4", "answer5"],
     questions: ['Commonly used data types Do Not Include:', 
     'The condition in an if / else statement is enclosed with _____.p',
     'Arrays in Javascript can be used to store _____. ', 
@@ -23,7 +25,7 @@ var codeQuiz  = {
     codeQuizAnswersTextTH:  ["1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"],
     codeQuizAnswersTextF:  ["1. commas" , "2. curly brackets", "3. quotes", "4. parenthesis" ],
     codeQuizAnswersTextFV:  ["1. Javascript", "2. terminal/bash", "3. foor loops", "4. console.log"],
-    codeQuizAnswers: ['anwser1','answer2','answer3','answer4','answer5']
+    codeQuizAnswers: ['3. alerts','3. parenthesis','4. all of the above','1. commas','4. console.log']
 
 }
 
@@ -103,6 +105,8 @@ function setTime() {
       } else if (scene === 4){
         questions.textContent = codeQuiz.questions[scene];
         questions.setAttribute("style" , "font-size: 46px; text-align: left;");  
+      }  else if (scene === 5){
+        createSumbitScore();
       }  
   }
 
@@ -147,8 +151,25 @@ function setTime() {
     buttonSubmit.addEventListener('click', function(event){
       location.reload();
     });
-
   }
+
+
+function evaluateScore(){
+
+  var resultButon = localStorage.getItem(codeQuiz.currentLocaStorageName[codeQuiz.scene-1]);
+  for (i = 0; i < 6; i++){
+    if(codeQuiz.scene === i){
+      if(resultButon === codeQuiz.codeQuizAnswers[codeQuiz.scene-1]){
+        console.log(codeQuiz.codeQuizAnswers[codeQuiz.scene-1]);
+        codeQuiz.score += 4;
+        console.log(codeQuiz.score);
+      } else{
+        codeQuiz.score += 0;
+        console.log(codeQuiz.score);     
+      }
+    }
+  }   
+}
 
   scores.addEventListener("click", function(event) {
 
@@ -159,47 +180,24 @@ function setTime() {
   });
 
 initButton.addEventListener('click', function(event){
-
     createQuestions(codeQuiz.scene);
     createButtons(codeQuiz.scene);
-    console.log(codeQuiz.scene);
+    console.log('current scene', codeQuiz.scene);
 });
 
 optionsContainer.addEventListener("click", function(event) {
-  event.stopPropagation();
+  event.preventDefault();
   var element = event.target;
-  console.log(element);
-  if(element.textContent == "3. alerts"){
+  //console.log(element);
+  if(element){
     codeQuiz.scene++;
     optionsContainer.innerHTML = "";
     createQuestions(codeQuiz.scene);
     createButtons(codeQuiz.scene);
-    console.log(codeQuiz.scene);
-
-  } if(element.textContent === "3. parenthesis"){
-    codeQuiz.scene++;
-    optionsContainer.innerHTML = "";
-    createQuestions(codeQuiz.scene);
-    createButtons(codeQuiz.scene);
-    console.log(codeQuiz.scene);
-
-  }if(element.textContent == "4. all of the above"){
-    codeQuiz.scene++;
-    optionsContainer.innerHTML = "";
-    createQuestions(codeQuiz.scene);
-    createButtons(codeQuiz.scene);
-    
-  }if(element.textContent == "3. quotes"){
-    codeQuiz.scene++;
-    optionsContainer.innerHTML = "";
-    createQuestions(codeQuiz.scene);
-    createButtons(codeQuiz.scene);
-    
-  }if(element.textContent == "4. console.log"){
-    codeQuiz.scene++;
-    optionsContainer.innerHTML = "";
-    createSumbitScore();
-
+    console.log('current scene', codeQuiz.scene);
+    var banswer = element.textContent;
+    localStorage.setItem(codeQuiz.currentLocaStorageName[codeQuiz.scene-1], banswer);
+    evaluateScore();
   } 
 });
 
