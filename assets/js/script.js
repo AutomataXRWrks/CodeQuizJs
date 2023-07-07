@@ -16,7 +16,7 @@ var codeQuiz  = {
     score: 0,
     round: 0,
     isHScoreActive: true,
-    hscores: [{name: 'Andy', score: 0}, {name: 'Cesar', score: 0}, {name: 'Emmanuel', score: 0}],
+    hscores: [],
     currentLocaStorageName: ["answer1", "answer2", "answer3", "answer4", "answer5"],
     questions: ['Commonly used data types Do Not Include:', 
     'The condition in an if / else statement is enclosed with _____.p',
@@ -114,20 +114,22 @@ function setTime() {
       }  else if (scene === 5){
         createSumbitScore();
 
-
       }  
   }
  
   function createHighScoreMenu(){
     codeQuiz.isHScoreActive = false;
+
     questions.textContent  = "High scores";
     questions.setAttribute("style" , "text-align: left");
     for (i = 0; i < codeQuiz.hscores.length; i++){
       var listHS = document.createElement("div");
-      listHS.setAttribute("style" , "font-family: Arial; font-size:30px; height; 50%; margin:1rem; background-color: rgba(217, 211, 233);");
-      questionContainer.appendChild(listHS);
-      listHS.textContent = i + '. ' +codeQuiz.hscores[i].name + ' - ' + codeQuiz.hscores[i].score;
-      console.log(JSON.parse(localStorage.getItem("user")));
+      //listHS.setAttribute("style" , "font-family: Arial; font-size:30px; height; 50%; margin:1rem; background-color: rgba(217, 211, 233);");
+      //questionContainer.appendChild(listHS);
+      //listHS.textContent = i + '. ' +codeQuiz.hscores[i].name + ' - ' + codeQuiz.hscores[i].score;
+      //console.log(JSON.parse(localStorage.getItem("user"))[1]);
+      console.log( JSON.parse(localStorage.getItem('user')));
+
     }
     gobButton.textContent = "Go back";
     gobButton.setAttribute("class", "goback");
@@ -166,16 +168,18 @@ function setTime() {
     userNameContainer.appendChild(buttonSubmit);
     questionContainer.appendChild(userNameContainer);
     buttonSubmit.addEventListener('click', function(event){
-      event.stopPropagation();
-      var resList = {
+      event.preventDefault();
+      //localStorage.setItem('user', '[]');
+      var resList = [{
       name:inputInitials.value,
       score: codeQuiz.score
-      }
-      codeQuiz.hscores.push(resList);
-      //console.log(codeQuiz.hscores);
-      location.reload();
-      localStorage.setItem('user',JSON.stringify(resList));
-      
+      }]
+      localStorage.setItem('user', '[]');
+      var oldData = JSON.parse(localStorage.getItem('user'));
+      console.log(typeof JSON.parse(localStorage.getItem('user')));
+      oldData.push(resList);
+      localStorage.setItem('user',JSON.stringify(oldData));
+      location.reload();     
     });
   }
 
