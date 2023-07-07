@@ -14,6 +14,8 @@ var codeQuiz  = {
     scene: 0,
     secondsLeft: 60,
     score: 0,
+    round: 0,
+    hscores: ['Andy'],
     currentLocaStorageName: ["answer1", "answer2", "answer3", "answer4", "answer5"],
     questions: ['Commonly used data types Do Not Include:', 
     'The condition in an if / else statement is enclosed with _____.p',
@@ -113,6 +115,15 @@ function setTime() {
   function createHighScoreMenu(){
     questions.textContent  = "High scores";
     questions.setAttribute("style" , "text-align: left");
+    var ulHS = document.createElement('ul');
+    ulHS.setAttribute("style" , "height: 20%; background-color:red;")
+    var listHS = document.createElement('li');
+    listHS.setAttribute("")
+    for (i = 0; i < codeQuiz.hscores.length; i++){
+      ulHS.appendChild(listHS);
+      listHS.textContent = codeQuiz.hscores[i];
+      console.log(codeQuiz.hscores[i]);
+    }
     gobButton.textContent = "Go back";
     gobButton.setAttribute("class", "goback");
     clearHScores.textContent = "Clear high scores"
@@ -132,7 +143,7 @@ function setTime() {
     result.remove();
     questions.textContent = 'All Done!';
     questions.setAttribute("style" , "font-size: 60px; text-align: left; font-family: Arial, Helvetica, sans-serif;");
-    initSubTitle.textContent = 'Your final score is' , '.';
+    initSubTitle.textContent = 'Your final score is ' + codeQuiz.score;
     initSubTitle.setAttribute('style', "font-size: 45px; padding-top:.5rem;font-family: Arial, Helvetica, sans-serif;");
     var userNameContainer = document.createElement('div');
     userNameContainer.setAttribute('style', " height:20%; ");
@@ -149,7 +160,11 @@ function setTime() {
     userNameContainer.appendChild(buttonSubmit);
     questionContainer.appendChild(userNameContainer);
     buttonSubmit.addEventListener('click', function(event){
+      event.stopPropagation();
       location.reload();
+      //codeQuiz.hscores.push(scores);
+      //localStorage.setItem(inputInitials.value + scores);
+      
     });
   }
 
