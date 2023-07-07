@@ -157,7 +157,7 @@ position: absolute;
 }
 
 #answer{
-
+    display: none;
     border-top: solid;
     font-size: 44px;
     font-style: italic;

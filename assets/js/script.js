@@ -16,7 +16,7 @@ var codeQuiz  = {
     score: 0,
     round: 0,
     isHScoreActive: true,
-    hscores: ['Andy', 'Cesar', 'Manuel'],
+    hscores: [{name: 'Andy', score: 0}, {name: 'Cesar', score: 0}, {name: 'Emmanuel', score: 0}],
     currentLocaStorageName: ["answer1", "answer2", "answer3", "answer4", "answer5"],
     questions: ['Commonly used data types Do Not Include:', 
     'The condition in an if / else statement is enclosed with _____.p',
@@ -37,7 +37,7 @@ function setTime() {
     var timerInterval = setInterval(function() {
       codeQuiz.secondsLeft--;
       timerText.textContent =  "Time: " + codeQuiz.secondsLeft;
-      console.log(codeQuiz.secondsLeft);
+      //console.log(codeQuiz.secondsLeft);
       if(codeQuiz.secondsLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
@@ -117,17 +117,17 @@ function setTime() {
 
       }  
   }
-
+ 
   function createHighScoreMenu(){
     codeQuiz.isHScoreActive = false;
     questions.textContent  = "High scores";
     questions.setAttribute("style" , "text-align: left");
     for (i = 0; i < codeQuiz.hscores.length; i++){
       var listHS = document.createElement("div");
-      listHS.setAttribute("style" , "font-size:30px; height; 50%; margin:1rem; background-color: rgba(217, 211, 233);");
+      listHS.setAttribute("style" , "font-family: Arial; font-size:30px; height; 50%; margin:1rem; background-color: rgba(217, 211, 233);");
       questionContainer.appendChild(listHS);
-      listHS.textContent = codeQuiz.hscores[i];
-      console.log(codeQuiz.hscores[i]);
+      listHS.textContent = i + '. ' +codeQuiz.hscores[i].name + ' - ' + codeQuiz.hscores[i].score;
+      console.log(JSON.parse(localStorage.getItem("user")));
     }
     gobButton.textContent = "Go back";
     gobButton.setAttribute("class", "goback");
@@ -167,9 +167,14 @@ function setTime() {
     questionContainer.appendChild(userNameContainer);
     buttonSubmit.addEventListener('click', function(event){
       event.stopPropagation();
+      var resList = {
+      name:inputInitials.value,
+      score: codeQuiz.score
+      }
+      codeQuiz.hscores.push(resList);
+      //console.log(codeQuiz.hscores);
       location.reload();
-      //codeQuiz.hscores.push(scores);
-      //localStorage.setItem(inputInitials.value + scores);
+      localStorage.setItem('user',JSON.stringify(resList));
       
     });
   }
@@ -181,24 +186,24 @@ function evaluateScore(){
   for (i = 0; i < 6; i++){
     if(codeQuiz.scene === i){
       if(resultButon === codeQuiz.codeQuizAnswers[codeQuiz.scene-1]){
-        console.log(codeQuiz.codeQuizAnswers[codeQuiz.scene-1]);
+        //console.log(codeQuiz.codeQuizAnswers[codeQuiz.scene-1]);
         codeQuiz.score += 4;
-        console.log(codeQuiz.score);
+        //console.log(codeQuiz.score);
       } else{
         codeQuiz.score += 0;
-        console.log(codeQuiz.score);     
+        //console.log(codeQuiz.score);     
       }
     }
   }   
 }
 
-  scores.addEventListener("click", function(event) {
+scores.addEventListener("click", function(event) {
 
-    var element = event.target;
-    if(element && codeQuiz.isHScoreActive){
-      createHighScoreMenu();
-    }
-  });
+  var element = event.target;
+  if(element && codeQuiz.isHScoreActive){
+    createHighScoreMenu();
+  }
+});
 
 initButton.addEventListener('click', function(event){
     createQuestions(codeQuiz.scene);
@@ -241,7 +246,7 @@ gobButton.addEventListener('click', function(event){
   }
 
   function levelLogic(){
-    console.log('level logic');
+    //console.log('level logic');
 
   }
 
