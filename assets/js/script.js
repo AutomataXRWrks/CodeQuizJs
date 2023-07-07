@@ -119,15 +119,15 @@ function setTime() {
  
   function createHighScoreMenu(){
     codeQuiz.isHScoreActive = false;
-
+    var newData = JSON.parse(localStorage.getItem('user'));
     questions.textContent  = "High scores";
     questions.setAttribute("style" , "text-align: left");
-    for (i = 0; i < codeQuiz.hscores.length; i++){
+    for (i = 0; i < newData.length; i++){
       var listHS = document.createElement("div");
-      //listHS.setAttribute("style" , "font-family: Arial; font-size:30px; height; 50%; margin:1rem; background-color: rgba(217, 211, 233);");
-      //questionContainer.appendChild(listHS);
-      //listHS.textContent = i + '. ' +codeQuiz.hscores[i].name + ' - ' + codeQuiz.hscores[i].score;
-      //console.log(JSON.parse(localStorage.getItem("user"))[1]);
+      listHS.setAttribute("style" , "font-family: Arial; font-size:30px; height; 50%; margin:1rem; background-color: rgba(217, 211, 233);");
+      questionContainer.appendChild(listHS);
+      listHS.textContent = i + '. ' +newData[i].name + ' - ' + newData[i].score;
+      console.log(JSON.parse(localStorage.getItem("user"))[1]);
       console.log( JSON.parse(localStorage.getItem('user')));
 
     }
@@ -170,11 +170,11 @@ function setTime() {
     buttonSubmit.addEventListener('click', function(event){
       event.preventDefault();
       //localStorage.setItem('user', '[]');
-      var resList = [{
+      var resList = {
       name:inputInitials.value,
       score: codeQuiz.score
-      }]
-      localStorage.setItem('user', '[]');
+      }
+      //localStorage.setItem('user', '[]');
       var oldData = JSON.parse(localStorage.getItem('user'));
       console.log(typeof JSON.parse(localStorage.getItem('user')));
       oldData.push(resList);
