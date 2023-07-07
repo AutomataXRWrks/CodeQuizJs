@@ -174,12 +174,21 @@ function setTime() {
       name:inputInitials.value,
       score: codeQuiz.score
       }
+
+      if(oldData == null){
+        //console.log('null');
+        //console.log( localStorage.setItem('user', '[{name: Js, score: 4}]'));
+        localStorage.setItem('user', '[]');
+        }
+      
       //localStorage.setItem('user', '[]');
       var oldData = JSON.parse(localStorage.getItem('user'));
-      console.log(typeof JSON.parse(localStorage.getItem('user')));
+      //console.log(oldData);
+      //console.log(typeof JSON.parse(localStorage.getItem('user')));
       oldData.push(resList);
       localStorage.setItem('user',JSON.stringify(oldData));
-      location.reload();     
+      location.reload();
+          
     });
   }
 
@@ -213,6 +222,7 @@ initButton.addEventListener('click', function(event){
     createQuestions(codeQuiz.scene);
     createButtons(codeQuiz.scene);
     //console.log('current scene', codeQuiz.scene);
+
 });
 
 optionsContainer.addEventListener("click", function(event) {
