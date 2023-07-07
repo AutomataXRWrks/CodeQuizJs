@@ -15,6 +15,7 @@ var codeQuiz  = {
     secondsLeft: 60,
     score: 0,
     round: 0,
+    isHScoreActive: true,
     hscores: ['Andy', 'Cesar', 'Manuel'],
     currentLocaStorageName: ["answer1", "answer2", "answer3", "answer4", "answer5"],
     questions: ['Commonly used data types Do Not Include:', 
@@ -36,12 +37,15 @@ function setTime() {
     var timerInterval = setInterval(function() {
       codeQuiz.secondsLeft--;
       timerText.textContent =  "Time: " + codeQuiz.secondsLeft;
-  
+      console.log(codeQuiz.secondsLeft);
       if(codeQuiz.secondsLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         // Calls function to create and append image
         createSumbitScore();
+      } if (codeQuiz.scene == 5){
+        clearInterval(timerInterval);
+        timerText.textContent = "";
       }
   
     }, 1000);
@@ -109,10 +113,13 @@ function setTime() {
         questions.setAttribute("style" , "font-size: 46px; text-align: left;");  
       }  else if (scene === 5){
         createSumbitScore();
+
+
       }  
   }
 
   function createHighScoreMenu(){
+    codeQuiz.isHScoreActive = false;
     questions.textContent  = "High scores";
     questions.setAttribute("style" , "text-align: left");
     for (i = 0; i < codeQuiz.hscores.length; i++){
@@ -136,6 +143,7 @@ function setTime() {
   }
 
   function createSumbitScore(){
+
     initButton.remove();
     optionsContainer.remove();
     result.remove();
@@ -187,7 +195,7 @@ function evaluateScore(){
   scores.addEventListener("click", function(event) {
 
     var element = event.target;
-    if(element){
+    if(element && codeQuiz.isHScoreActive){
       createHighScoreMenu();
     }
   });
@@ -195,7 +203,7 @@ function evaluateScore(){
 initButton.addEventListener('click', function(event){
     createQuestions(codeQuiz.scene);
     createButtons(codeQuiz.scene);
-    console.log('current scene', codeQuiz.scene);
+    //console.log('current scene', codeQuiz.scene);
 });
 
 optionsContainer.addEventListener("click", function(event) {
@@ -222,6 +230,7 @@ gobButton.addEventListener('click', function(event){
   //createQuestions(codeQuiz.scene);
   //createButtons(codeQuiz.scene);
   location.reload();
+  codeQuiz.isHScoreActive = false;
 });
 
   function init(){
