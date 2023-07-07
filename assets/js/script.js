@@ -15,7 +15,7 @@ var codeQuiz  = {
     secondsLeft: 60,
     score: 0,
     round: 0,
-    hscores: ['Andy'],
+    hscores: ['Andy', 'Cesar', 'Manuel'],
     currentLocaStorageName: ["answer1", "answer2", "answer3", "answer4", "answer5"],
     questions: ['Commonly used data types Do Not Include:', 
     'The condition in an if / else statement is enclosed with _____.p',
@@ -115,12 +115,10 @@ function setTime() {
   function createHighScoreMenu(){
     questions.textContent  = "High scores";
     questions.setAttribute("style" , "text-align: left");
-    var ulHS = document.createElement('ul');
-    ulHS.setAttribute("style" , "height: 20%; background-color:red;")
-    var listHS = document.createElement('li');
-    listHS.setAttribute("")
     for (i = 0; i < codeQuiz.hscores.length; i++){
-      ulHS.appendChild(listHS);
+      var listHS = document.createElement("div");
+      listHS.setAttribute("style" , "font-size:30px; height; 50%; margin:1rem; background-color: rgba(217, 211, 233);");
+      questionContainer.appendChild(listHS);
       listHS.textContent = codeQuiz.hscores[i];
       console.log(codeQuiz.hscores[i]);
     }
